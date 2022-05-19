@@ -11,12 +11,10 @@ bootstrap_servers=brokers,auto_offset_reset='earliest')
 from producer import messageSender 
 filename='filedetails.txt'
 
-with open(filename,'w') as f:
-    for message in consumer:
-        print('Topic: %s:Partion: %d Message:%s' %(message.topic,message.partition,message.value))
-        f.write('Topic: %s:Partion: %d Message:%s' %(message.topic,message.partition,message.value))
-        
-    f.close()
+f = open(filename,'a')
+for message in consumer :
+    f.write(str(message.value))
+f.close()
 
 while True:
     pass 
